@@ -9,6 +9,17 @@ import {LayoutComponent} from './ui/layout/layout.component';
 import {FooterComponent} from './ui/footer/footer.component';
 import {HeaderComponent} from './ui/header/header.component';
 import {AlertComponent} from './alert/alert.component';
+import {Routes} from '@angular/router';
+
+
+const routes: Routes = [
+  {path: 'home',
+    component: AppComponent},
+  { path: '',
+    pathMatch : 'full',
+    redirectTo : '/'},
+  { path: '/', component: AppComponent }
+];
 
 @NgModule({
   declarations: [
