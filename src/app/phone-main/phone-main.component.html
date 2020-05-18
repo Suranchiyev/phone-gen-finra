@@ -1,0 +1,92 @@
+<div class="container">
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <ul>
+      <li>provide 10 digit phone number</li>
+      <li>program will generate all possible phone numbers(without duplicates) based on provided number</li>
+      <li>process might take up to 1 minute</li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <alert></alert>
+      <input type="text" class="form-control" placeholder="(774)534-6272" [(ngModel)]="phoneNumber"
+             (ngModelChange)="onPhoneChange()">
+    </div>
+    <div class="col-2">
+      <button *ngIf="!isGenerating" class="btn btn-primary" (click)="generate()">Generate new</button>
+      <div *ngIf="isGenerating" class="spinner-border text-primary pt-2" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="col-4">
+
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row" *ngIf="generatedNumber !== null">
+    <div class="col-6">
+      <div>Phone numbers are generated for <strong>{{formatPhone(generatedNumber.phoneNumber)}} </strong>:</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">Original phone number:</div>
+            <div class="col" style="text-align: right">{{formatPhone(generatedNumber.phoneNumber)}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">Generated date:</div>
+            <div class="col" style="text-align: right">{{generatedNumber.generatedDate}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">Amount of phone numbers generated:</div>
+            <div class="col" style="text-align: right">{{generatedNumber.numberPhonesGenerated}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">Phone numbers:</div>
+            <div class="col" style="text-align: right"><a href="{{generatedNumber.fileUrlInS3}}">Download</a></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <div>Previously generated phones:</div>
+  <div *ngIf="prevousPhoneNumbers.length > 1">
+    <table class="table">
+      <thead class="thead-light">
+        <th>original phone</th>
+        <th>date</th>
+        <th>amount</th>
+        <th>generated phone numbers</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let phoneStatus of prevousPhoneNumbers">
+          <td>{{formatPhone(phoneStatus.phoneNumber)}}</td>
+          <td>{{phoneStatus.generatedDate}}</td>
+          <td>{{phoneStatus.numberPhonesGenerated}}</td>
+          <td><a href="{{phoneStatus.fileUrlInS3}}">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>

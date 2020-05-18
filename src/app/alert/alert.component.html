@@ -1,0 +1,3 @@
+<ng-container *ngIf="alertService.alertDisplay !== null && alertId === alertService.alertIdConfirm">
+  <ngb-alert [type]="alertService.alertDisplay.type" (close)="alertService.closeAlert()">{{ alertService.alertDisplay.message }}</ngb-alert>
+</ng-container>
